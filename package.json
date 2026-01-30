@@ -8,6 +8,7 @@
     "build": "parcel build src/*.html --public-url ./"
   },
   "devDependencies": {
+    "@parcel/transformer-jsonld": "^2.12.0",
     "autoprefixer": "^10.4.17",
     "parcel": "^2.12.0",
     "postcss": "^8.4.35",
