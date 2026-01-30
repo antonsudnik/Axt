@@ -1,0 +1,286 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/inter-v20-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./fonts/inter-v20-latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lora';
+  src: url('./fonts/lora-v37-latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* 2. Директивы Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 3. Глобальные настройки */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lora', serif;
+}
+
+/* 4. Ваши кастомные компоненты (собранные из всех HTML файлов) */
+
+/* === Buttons & Text Accents === */
+.cta-button {
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px -10px rgba(0, 255, 255, 0.4);
+}
+
+.aqua-text {
+    color: #00CCCC;
+    font-weight: 500;
+}
+
+/* === Icons Colors === */
+.checkmark-icon, 
+.checkmark {
+    color: #00CCCC;
+}
+
+.cross-mark {
+    color: #9CA3AF;
+}
+
+/* === GDPR Checklist Accordion === */
+.accordion-item {
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.accordion-header {
+    padding: 1.5rem 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    padding: 0 0;
+}
+
+.accordion-content-open {
+    max-height: 1000px; /* Достаточно большое значение */
+    padding-bottom: 1.5rem;
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease;
+}
+
+.accordion-icon-rotated {
+    transform: rotate(180deg);
+}
+
+/* === EU AI Guide Tables === */
+.content-section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.ai-table-header {
+    background-color: #F0F8FF;
+    font-weight: 700;
+    padding: 1rem;
+    border-bottom: 2px solid #00CCCC;
+}
+
+.ai-table-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+@media (min-width: 1024px) {
+    .ai-table-row {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 1rem;
+    }
+}
+
+.table-label {
+    font-weight: 600;
+    color: #1A232E;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+    .table-label {
+        display: none;
+    }
+}
+
+.risk-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.95rem;
+}
+
+.risk-table th, 
+.risk-table td {
+    border: 1px solid #E5E7EB;
+    padding: 1rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+.risk-table th {
+    background-color: #F0F8FF;
+    font-weight: 700;
+}
+
+.risk-table td ul {
+    list-style-type: disc;
+    margin-left: 1.25rem;
+}
+
+/* === Pricing Cards === */
+.featured-card {
+    border: 3px solid #00CCCC;
+    box-shadow: 0 20px 40px -15px rgba(0, 204, 204, 0.3);
+    transform: scale(1.02);
+}
+
+/* === How It Works Process Arrows === */
+@media (min-width: 768px) {
+    .process-arrow {
+        position: relative;
+    }
+    
+    .process-arrow::after {
+        content: '';
+        position: absolute;
+        top: 25%;
+        right: -40px; 
+        width: 30px;
+        height: 2px;
+        background-color: #E5E7EB;
+        z-index: 0;
+    }
+    
+    .process-arrow::before {
+        content: '';
+        position: absolute;
+        top: 25%;
+        right: -45px;
+        width: 8px;
+        height: 8px;
+        border-top: 2px solid #E5E7EB;
+        border-right: 2px solid #E5E7EB;
+        transform: translateY(-50%) rotate(45deg);
+    }
+}
+
+/* === Blog Cards === */
+.card-shadow {
+    transition: all 0.3s ease;
+}
+
+.card-shadow:hover {
+    box-shadow: 0 15px 30px -10px rgba(26, 35, 46, 0.1);
+    transform: translateY(-5px);
+}
+
+/* === Contact Forms === */
+.form-input {
+    transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #00CCCC;
+}
+
+/* === Progress Ring Animation === */
+@keyframes progress-load {
+    0% { stroke-dashoffset: 226; }
+    100% { stroke-dashoffset: 30; }
+}
+
+.progress-ring-circle {
+    animation: progress-load 1.5s ease-out forwards;
+}
+/* === Legal Pages (Terms & Privacy) === */
+.legal-content h2 { 
+    font-family: 'Lora', serif;
+    font-size: 1.5rem; 
+    font-weight: 700; 
+    color: #1A232E; 
+    margin-top: 2.5rem; 
+    margin-bottom: 1rem; 
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+}
+.legal-content h3 { 
+    font-family: 'Inter', sans-serif;
+    font-size: 1.15rem; 
+    font-weight: 700; 
+    color: #1A232E; 
+    margin-top: 2rem; 
+    margin-bottom: 0.75rem; 
+}
+.legal-content p, .legal-content li { 
+    color: #1A232E; 
+    opacity: 0.9;
+    line-height: 1.7; 
+    margin-bottom: 1rem; 
+}
+.legal-content ul { 
+    list-style-type: disc; 
+    padding-left: 1.5rem; 
+    margin-bottom: 1.5rem; 
+}
+.legal-table-container {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+.legal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    min-width: 600px; 
+}
+.legal-table th, .legal-table td {
+    border: 1px solid #E5E7EB;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    vertical-align: top;
+}
+.legal-table th {
+    background-color: #F8F9FA;
+    font-weight: 700;
+    color: #1A232E;
+}
+.legal-table tr:nth-child(even) {
+    background-color: #FCFCFD;
+}
