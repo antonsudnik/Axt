@@ -1,0 +1,16 @@
+{
+  "name": "axiomtrak-web",
+  "version": "1.0.0",
+  "description": "AxiomTrak - Law meets Code",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel src/*.html",
+    "build": "parcel build src/*.html --public-url ./"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "parcel": "^2.12.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1"
+  }
+}
