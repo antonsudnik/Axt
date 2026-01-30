@@ -2,7 +2,8 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{html,js}",
+    "./*.html",          // ADD THIS: scans all HTML files in root
+    "./src/**/*.{js,ts,jsx,tsx}", // Scans JS in src
   ],
   theme: {
     extend: {
