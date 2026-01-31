@@ -139,21 +139,9 @@
         </div>
     </div>
 
-    <script type="module" src="./src/menu.js"></script>
-    <script>
-        // Check Auth
-        const token = localStorage.getItem('jwt_token');
-        if (!token) window.location.href = 'login.html';
-        
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            localStorage.removeItem('jwt_token');
-            window.location.href = 'login.html';
-        });
-
-        // Modal Logic
-        const modal = document.getElementById('companyModal');
-        document.getElementById('addCompanyBtn').addEventListener('click', () => modal.classList.remove('hidden'));
-        document.getElementById('closeModal').addEventListener('click', () => modal.classList.add('hidden'));
-    </script>
+   <script type="module">
+    import { initDashboard } from './src/dashboard.js';
+    document.addEventListener('DOMContentLoaded', initDashboard);
+</script>
 </body>
 </html>
