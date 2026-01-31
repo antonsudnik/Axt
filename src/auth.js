@@ -1,5 +1,10 @@
-// Константы API (замените на ваш реальный URL, если он другой)
-const API_URL = 'http://localhost:8000'; // Или ваш продакшн URL
+/**
+ * Auth Module for AxiomTrak
+ * Fixes: Production URL & Correct Endpoints
+ */
+
+// ВАЖНО: Указываем адрес вашего реального сервера с версией API
+const API_URL = 'https://api.axiomtrak.com/api/v1';
 
 export function initRegister() {
     const registerForm = document.getElementById('registerForm');
@@ -12,7 +17,6 @@ export function initRegister() {
     registerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Сброс сообщений
         successMessage.classList.add('hidden');
         errorMessage.classList.add('hidden');
         registerButton.disabled = true;
@@ -31,7 +35,7 @@ export function initRegister() {
         }
 
         try {
-            // Регистрация
+            // Исправлено: путь теперь корректно собирается как .../api/v1/auth/register
             const response = await fetch(`${API_URL}/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -39,8 +43,9 @@ export function initRegister() {
             });
 
             if (response.ok) {
-                successMessage.classList.remove('hidden');
-                setTimeout(() => window.location.href = 'login.html', 2000);
+                // Если API возвращает JSON при успехе, можно его прочитать, но не обязательно
+                showSuccess(successMessage, 'Account created! Redirecting...');
+                setTimeout(() => window.location.href = '/login', 2000); // Чистый URL /login
             } else if (response.status === 409) {
                 showError(errorMessage, 'Email already registered.');
             } else {
@@ -48,9 +53,10 @@ export function initRegister() {
                 showError(errorMessage, error.detail || 'Registration error');
             }
         } catch (error) {
-            console.error(error);
-            showError(errorMessage, 'Could not connect to server');
+            console.error('Registration Error:', error);
+            showError(errorMessage, 'Connection error. Check your internet or API status.');
         } finally {
+            // Кнопку разблокируем только если нет успеха (чтобы не нажали дважды при редиректе)
             if (successMessage.classList.contains('hidden')) {
                 resetBtn(registerButton, originalBtnText);
             }
@@ -76,23 +82,31 @@ export function initLogin() {
         const password = document.getElementById('password').value;
 
         try {
-            const response = await fetch(`${API_URL}/auth/token`, { // Проверьте этот эндпоинт в вашем API
+            // ИСПРАВЛЕНО: Возвращен эндпоинт /auth/login (как было в старом HTML)
+            // Если ваш бэкенд точно требует /auth/token, замените login на token
+            const response = await fetch(`${API_URL}/auth/login`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' }, // Если ваш API требует form-data, нужно изменить
-                body: JSON.stringify({ email: email, password: password }) 
-                // Внимание: часто OAuth2 требует form-urlencoded, если не заработает — скажите мне.
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, password: password })
             });
 
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('jwt_token', data.access_token);
-                window.location.href = 'dashboard.html';
+                // Перенаправление на дашборд (чистый URL)
+                window.location.href = '/dashboard'; 
             } else {
-                showError(errorMessage, 'Invalid email or password');
+                // Пытаемся прочитать ошибку, если сервер её прислал
+                try {
+                    const errorData = await response.json();
+                    showError(errorMessage, errorData.detail || 'Invalid email or password');
+                } catch {
+                    showError(errorMessage, 'Invalid email or password');
+                }
             }
         } catch (error) {
-            console.error(error);
-            showError(errorMessage, 'Connection error');
+            console.error('Login Error:', error);
+            showError(errorMessage, 'Connection error. Server may be unreachable.');
         } finally {
             resetBtn(loginButton, originalBtnText);
         }
@@ -100,6 +114,11 @@ export function initLogin() {
 }
 
 function showError(el, msg) {
+    el.textContent = msg;
+    el.classList.remove('hidden');
+}
+
+function showSuccess(el, msg) {
     el.textContent = msg;
     el.classList.remove('hidden');
 }
