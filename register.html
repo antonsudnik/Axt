@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | AxiomTrak</title>
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+<body class="font-inter bg-light-gray-bg text-deep-blue-black antialiased flex flex-col min-h-screen">
 
+    <header class="bg-white/90 backdrop-blur-md z-50 border-b border-gray-200">
+        <nav class="max-w-7xl mx-auto flex justify-center py-4 px-6">
+            <a href="index.html" class="flex items-center">
+                <svg class="w-40" viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 20L10 38H30L20 20Z" fill="#00FFFF"/>
+                    <text x="40" y="28" font-family="Lora, serif" font-weight="bold" font-size="24" fill="#1A232E">AxiomTrak</text>
+                </svg>
+            </a>
+        </nav>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-6">
+        <div class="bg-white p-8 md:p-10 rounded-xl shadow-lg w-full max-w-md border border-gray-100">
+            <h1 class="font-lora text-3xl font-bold text-center mb-2">Create Account</h1>
+            <p class="text-center text-gray-500 mb-8">Start your compliance automation</p>
+
+            <form id="registerForm" class="space-y-5">
+                <div id="errorMessage" class="hidden bg-red-50 text-red-600 p-3 rounded-lg text-sm border border-red-100"></div>
+                <div id="successMessage" class="hidden bg-green-50 text-green-700 p-3 rounded-lg text-sm border border-green-200"></div>
+
+                <div>
+                    <label for="fullName" class="block text-sm font-bold text-deep-blue-black mb-1">Full Name</label>
+                    <input type="text" id="fullName" required class="w-full px-4 py-3 rounded-lg bg-light-gray-bg border border-gray-300 focus:border-bright-aqua focus:ring-1 focus:ring-bright-aqua outline-none">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-bold text-deep-blue-black mb-1">Email Address</label>
+                    <input type="email" id="email" required class="w-full px-4 py-3 rounded-lg bg-light-gray-bg border border-gray-300 focus:border-bright-aqua focus:ring-1 focus:ring-bright-aqua outline-none">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-bold text-deep-blue-black mb-1">Password</label>
+                    <input type="password" id="password" required class="w-full px-4 py-3 rounded-lg bg-light-gray-bg border border-gray-300 focus:border-bright-aqua focus:ring-1 focus:ring-bright-aqua outline-none">
+                </div>
+                
+                <div>
+                    <label for="confirmPassword" class="block text-sm font-bold text-deep-blue-black mb-1">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required class="w-full px-4 py-3 rounded-lg bg-light-gray-bg border border-gray-300 focus:border-bright-aqua focus:ring-1 focus:ring-bright-aqua outline-none">
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" id="registerButton" class="w-full bg-bright-aqua text-deep-blue-black font-bold py-4 rounded-lg text-lg hover:bg-[#00E6E6] transition-all">
+                        Create Account
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-6 text-center text-sm text-gray-500">
+                Already have an account? 
+                <a href="login.html" class="text-deep-blue-black font-bold hover:underline">Login here</a>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initRegister } from './src/auth.js';
+        document.addEventListener('DOMContentLoaded', initRegister);
+    </script>
+</body>
+</html>
