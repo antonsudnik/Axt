@@ -10,6 +10,10 @@ export default defineConfig({
         terms: resolve(__dirname, 'terms.html'),
         privacy: resolve(__dirname, 'privacy.html'),
         notfound: resolve(__dirname, '404.html'),
+        // Новые страницы:
+        login: resolve(__dirname, 'login.html'),
+        register: resolve(__dirname, 'register.html'),
+        dashboard: resolve(__dirname, 'dashboard.html'),
       },
     },
   },
